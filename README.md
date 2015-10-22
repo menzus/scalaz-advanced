@@ -49,3 +49,14 @@ Identically typed typeclass instances
  - it's impossible to combine generally different monads
  - in scalaz there are few monad transformers, ListT, OptionT
  - check stack of monads
+
+** Chapter 6, applicatives
+ - definition of F[A] applicative:
+   - an operation append with type (F[A], F[A => B]) => F[B]
+   - an operation pure with type A => F[A], same as return with monad
+ - the intuitive difference here is that monads are context sensitive while applicatives are context free
+ - rules for applicatives:
+   - identity: append(a)(pure(x => x)) == a
+   - homomorphism: append(pure(a))(pure(b)) == pure(b(a))
+   - interchange: append(pure(a))(fb) == append(fb)(pure(x => x(a)))
+   - map-like: map(fa)(fb) == append(fa)(pure(fb))
